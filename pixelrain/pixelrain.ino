@@ -1,7 +1,3 @@
-// Matrix Rain
-// Control an LED matrix to emulate falling droplets - as the code in the movie "The Matrix".
-// by Andy-K-To
-
 #include "FastLED.h"
 #include "timer.h"
 #include "droplet.h"
@@ -15,16 +11,10 @@
 #define SNAKE_HORIZONTAL  3
 #define SNAKE_VERTICAL    4
 
-
-/******************************************************************************/
-/*** PROGRAM SETTINGS - ADAPT TO YOUR NEEDS! **********************************/
-/******************************************************************************/
-
 // Hardware definitions.
 #define DATA_PIN    7
 #define LED_TYPE    WS2812B
 #define COLOR_ORDER GRB
-
 
 // Effect settings.
 constexpr unsigned long REFRESH_PERIOD_MS = 20;
@@ -40,9 +30,9 @@ const CRGB COLOR_REST(0, 0, 0);
 const CRGB COLOR_DECAY(20, 1, 1);
 
 // "Fire" color scheme
-// const CRGB COLOR_INITIAL(MAX_BRIGHTNESS, MAX_BRIGHTNESS, 0);
-// const CRGB COLOR_REST(0, 0, 0);
-// const CRGB COLOR_DECAY(1, 5, 1);
+//const CRGB COLOR_INITIAL(MAX_BRIGHTNESS, MAX_BRIGHTNESS, 0);
+//const CRGB COLOR_REST(0, 0, 0);
+//const CRGB COLOR_DECAY(1, 5, 1);
 
 
 // Matrix dimensions.
@@ -52,12 +42,6 @@ constexpr int COLS = 8;
 constexpr int NUM_LEDS = ROWS * COLS;
 constexpr int DROPLETS_PER_COLUMN = 3;
 constexpr int NUM_DROPLETS = DROPLETS_PER_COLUMN * COLS;
-
-
-
-/******************************************************************************/
-/*** GLOBAL :( VARIABLES ******************************************************/
-/******************************************************************************/
 
 // Global array with all LEDs.
 CRGB leds[NUM_LEDS];
@@ -90,18 +74,16 @@ Timer global_timer(REFRESH_PERIOD_MS);
 Timer dim_timer(REFRESH_PERIOD_MS);
 
 
-/******************************************************************************/
-/*** MAIN PROGRAM - NOTHING TO CHANGE HERE (IN THEORY!) ***********************/
-/******************************************************************************/
-
 void setup() {
   // 3 seconds delay for recovery.
-  delay(3000);
+  delay(2000);
   
   // Tell FastLED about the LED strip configuration.
   FastLED.addLeds<LED_TYPE,DATA_PIN,COLOR_ORDER>(leds, NUM_LEDS)
     .setCorrection(TypicalLEDStrip)
     .setDither(MAX_BRIGHTNESS < 255);
+    
+  delay(1000);
 
   // Initialize droplets.
   for(unsigned int i=0; i<NUM_DROPLETS; i++) {
